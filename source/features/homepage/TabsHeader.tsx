@@ -1,22 +1,49 @@
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useRef} from 'react';
 import Colors from '../../constants/Colors';
 import {TOP_TAB_WIDTH} from '../../constants/Variables';
+import LinearGradient from 'react-native-linear-gradient';
 
 const TABS = ['Songs', 'Playlists', 'Albums', 'Artists'];
 
-const Tab = ({text}) => {
-  return <Text style={styles.tabtext}>{text}</Text>;
+type TabProps = {
+  text: string;
+  index: number;
+  scrollToIndex: (index: number) => void;
 };
 
-const TabsHeader = () => {
-  const transX = useRef(new Animated.Value(0)).current;
+type TabHeaderProps = {
+  transX: Animated.AnimatedInterpolation;
+  scrollToIndex: (index: number) => void;
+};
 
+const Tab: React.FC<TabProps> = ({text, index, scrollToIndex}) => {
+  return (
+    <Pressable style={styles.pressable} onPress={() => scrollToIndex(index)}>
+      <Text style={styles.tabtext}>{text}</Text>
+    </Pressable>
+  );
+};
+
+const TabsHeader: React.FC<TabHeaderProps> = ({transX, scrollToIndex}) => {
   return (
     <View style={styles.tabview}>
-      <Animated.View style={animatedstyles(transX).seltab} />
+      <Animated.View style={animatedstyles(transX).seltab}>
+        {/* <LinearGradient
+          colors={[Colors.primary, Colors.primary, Colors.primaryLite]}
+          style={styles.linearGradient}
+          start={{x: 0, y: 0.5}}
+        /> */}
+      </Animated.View>
       {TABS.map((tab, index) => {
-        return <Tab text={tab} key={tab} />;
+        return (
+          <Tab
+            text={tab}
+            key={tab}
+            index={index}
+            scrollToIndex={scrollToIndex}
+          />
+        );
       })}
     </View>
   );
@@ -38,9 +65,15 @@ const styles = StyleSheet.create({
     color: Colors.white,
     fontFamily: 'MavenPro-SemiBold',
   },
+  pressable: {
+    width: TOP_TAB_WIDTH,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-const animatedstyles = (transX?: Animated.Value) =>
+const animatedstyles = (transX: Animated.AnimatedInterpolation) =>
   StyleSheet.create({
     seltab: {
       backgroundColor: Colors.primary,
@@ -49,5 +82,11 @@ const animatedstyles = (transX?: Animated.Value) =>
       height: 40,
       width: TOP_TAB_WIDTH,
       borderRadius: 10,
+      transform: [
+        {
+          //@ts-ignore
+          translateX: transX,
+        },
+      ],
     },
   });

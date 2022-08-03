@@ -8,7 +8,6 @@ import {
 import React from 'react';
 import SearchSvg from '../assets/svg/search.svg';
 import UserSvg from '../assets/svg/user.svg';
-import BackSvg from '../assets/svg/back.svg';
 
 const logo = require('../assets/images/logo.png');
 

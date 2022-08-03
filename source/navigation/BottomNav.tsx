@@ -58,25 +58,25 @@ const TabIcons: React.FC<TabIconsProps> = ({
         <HomeSvg
           height={ICON_SIZE}
           width={ICON_SIZE}
-          fill={type === currentTab ? Colors.primary : Colors.dimwhite}
+          fill={type === currentTab ? Colors.primary : Colors.white}
         />
       ) : type === 'favorites' ? (
         <FavoritesSvg
           height={ICON_SIZE}
           width={ICON_SIZE}
-          fill={type === currentTab ? Colors.primary : Colors.dimwhite}
+          fill={type === currentTab ? Colors.primary : Colors.white}
         />
       ) : type === 'discover' ? (
         <DiscoverSvg
           height={ICON_SIZE}
           width={ICON_SIZE}
-          fill={type === currentTab ? Colors.primary : Colors.dimwhite}
+          fill={type === currentTab ? Colors.primary : Colors.white}
         />
       ) : (
         <LiveStreamSvg
           height={ICON_SIZE}
           width={ICON_SIZE}
-          fill={type === currentTab ? Colors.primary : Colors.dimwhite}
+          fill={type === currentTab ? Colors.primary : Colors.white}
         />
       )}
     </Pressable>
