@@ -6,7 +6,7 @@ import {
   DeviceEventEmitter,
 } from 'react-native';
 
-const {GetMusicFiles} = NativeModules;
+import * as MediaLibrary from 'expo-media-library';
 
 const requestPermission = async () => {
   try {
@@ -27,24 +27,5 @@ const requestPermission = async () => {
 
 export const GetAllSongs = async (artist = '', album = '') => {
   await requestPermission();
-  DeviceEventEmitter.addListener('onBatchReceived', params => {
-    console.log({songs: [...params.batch]});
-  });
-  GetMusicFiles.getAll(
-    {
-      blured: true, // works only when 'cover' is set to true
-      artist: true,
-      duration: true, //default : true
-      genre: true,
-      title: true,
-      cover: true,
-      minimumSongDuration: 10000, // get songs bigger than 10000 miliseconds duration,
-      batchNumber: 1,
-      //  delay: 1000,
-    },
-    (f: any) => {
-      console.log(typeof f);
-    },
-    (error: any) => Alert.alert(JSON.stringify(error)),
-  );
+  MediaLibrary.getAssetsAsync({mediaType: 'audio'}).then(m => console.log(m));
 };
