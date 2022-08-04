@@ -268,9 +268,10 @@ dependencies {
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
-implementation project(':react-native-get-music-files')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
+ implementation 'com.github.wseemann:FFmpegMediaMetadataRetriever-core:1.0.16'
+    implementation 'com.github.wseemann:FFmpegMediaMetadataRetriever-native:1.0.16'
+	implementation files('src/main/libs/jid3lib-0.5.4.jar')
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
     }

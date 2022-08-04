@@ -1,8 +1,12 @@
-//@ts-ignore
-import MusicFiles, {RNAndroidAudioStore} from 'react-native-get-music-files';
-
 import React from 'react';
-import {Alert, PermissionsAndroid} from 'react-native';
+import {
+  Alert,
+  PermissionsAndroid,
+  NativeModules,
+  DeviceEventEmitter,
+} from 'react-native';
+
+const {GetMusicFiles} = NativeModules;
 
 const requestPermission = async () => {
   try {
@@ -23,9 +27,24 @@ const requestPermission = async () => {
 
 export const GetAllSongs = async (artist = '', album = '') => {
   await requestPermission();
-  RNAndroidAudioStore.getSongs({artist, album})
-    .then((f: any) => {
-      // console.log(f);
-    })
-    .catch((error: any) => Alert.alert(JSON.stringify(error)));
+  DeviceEventEmitter.addListener('onBatchReceived', params => {
+    console.log({songs: [...params.batch]});
+  });
+  GetMusicFiles.getAll(
+    {
+      blured: true, // works only when 'cover' is set to true
+      artist: true,
+      duration: true, //default : true
+      genre: true,
+      title: true,
+      cover: true,
+      minimumSongDuration: 10000, // get songs bigger than 10000 miliseconds duration,
+      batchNumber: 1,
+      //  delay: 1000,
+    },
+    (f: any) => {
+      console.log(typeof f);
+    },
+    (error: any) => Alert.alert(JSON.stringify(error)),
+  );
 };

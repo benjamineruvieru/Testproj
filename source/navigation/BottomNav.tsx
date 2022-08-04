@@ -8,7 +8,7 @@ import Colors from '../constants/Colors';
 import {TAB_WIDTH} from '../constants/Variables';
 
 const HALF_TAB = TAB_WIDTH / 2 + 15 / 2;
-let ICON_SIZE: number = 25;
+let ICON_SIZE: number = 23;
 
 type TabIconsProps = {
   type: string;
@@ -132,10 +132,14 @@ const styles = (transX?: Animated.Value) =>
       bottom: 0,
       left: 0,
       right: 0,
-      height: 60,
+      height: 65,
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
+      elevation: 15,
+      backgroundColor: Colors.musicTab,
+      borderTopRightRadius: 30,
+      borderTopLeftRadius: 30,
     },
     iconview: {
       alignContent: 'center',
