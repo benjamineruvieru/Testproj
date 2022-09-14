@@ -27,7 +27,7 @@ const ICON_SIZE = 23;
 const Songtab = (props: Songslistprops) => {
   return (
     <View style={styles.tab}>
-      <Image source={logo} style={styles.img} />
+      <Image source={{uri: props.item.cover}} style={styles.img} />
       <View style={styles.innerview}>
         <Text style={styles.nametext}>{props.item.title}</Text>
         <View style={styles.author_durationview}>

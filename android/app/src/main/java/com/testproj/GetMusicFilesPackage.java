@@ -22,7 +22,7 @@ public class GetMusicFilesPackage implements ReactPackage {
            ReactApplicationContext reactContext) {
        List<NativeModule> modules = new ArrayList<>();
 
-       modules.add(new GetMusicFilesModule(reactContext));
+       modules.add(new GetAlbumModule(reactContext));
 
        return modules;
    }

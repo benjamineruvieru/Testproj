@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import * as MediaLibrary from 'expo-media-library';
-
+const {GetAlbumModule} = NativeModules;
 const requestPermission = async () => {
   try {
     const granted = await PermissionsAndroid.requestMultiple([
@@ -27,5 +27,16 @@ const requestPermission = async () => {
 
 export const GetAllSongs = async (artist = '', album = '') => {
   await requestPermission();
-  MediaLibrary.getAssetsAsync({mediaType: 'audio'}).then(m => console.log(m));
+  MediaLibrary.getAssetsAsync({mediaType: 'audio'}).then(m => {
+    console.log(m);
+    GetAlbumModule.getMusicAlbumImage(
+      m.assets,
+      (success: any) => {
+        console.log(success);
+      },
+      (error: any) => {
+        console.error(`Error found! ${error}`);
+      },
+    );
+  });
 };

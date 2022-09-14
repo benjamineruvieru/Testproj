@@ -10,7 +10,7 @@ const DATA = [
     album: 'Finisterra',
     genre: 'Folk',
     duration: 100000, // miliseconds
-    cover: 'file:///sdcard/0/123.png',
+    cover: 'file:///storage/emulated/0/48.jpg',
     blur: 'file:///sdcard/0/123-blur.png', //Will come null if createBLur is set to false
     url: '/sdcard/0/la-danza-del-fuego.mp3',
   },
@@ -21,7 +21,7 @@ const DATA = [
     album: 'Finisterra',
     genre: 'Folk',
     duration: 160000, // miliseconds
-    cover: 'file:///sdcard/0/123.png',
+    cover: 'file:///storage/emulated/0/48-blur.jpg',
     blur: 'file:///sdcard/0/123-blur.png', //Will come null if createBLur is set to false
     url: '/sdcard/0/la-danza-del-fuego.mp3',
   },
